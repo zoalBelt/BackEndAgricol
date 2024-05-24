@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ProductoModelo {
 
-
     public boolean guardarNuevoProducto(Producto newProoducto) {
         Conexion conexion = new Conexion();
         conexion.openConexion();
@@ -147,6 +146,5 @@ public class ProductoModelo {
             return false;
         }
     };
-
 
 }
