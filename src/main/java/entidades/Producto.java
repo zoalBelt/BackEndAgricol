@@ -20,9 +20,8 @@ public class Producto {
     public Producto() {
     }
 
-    public void Producto(int idproducto, String nombrePoducto, String clasificacion, double cantidaDisponible,
+    public Producto(int idproducto, String nombrePoducto, String clasificacion, double cantidaDisponible,
                          String localizacion, int precio, int idUnidComercializacion){
-
         this.idproducto = idproducto;
         this.nombrePoducto = nombrePoducto;
         this.clasificacion = clasificacion;
@@ -31,7 +30,17 @@ public class Producto {
         this.precio = precio;
         this.idUnidComercializacion = idUnidComercializacion;
     }
-// Declarar los metodos get y set para la clase
+
+    public Producto(String nombrePoducto, String clasificacion, double cantidaDisponible, String localizacion, double precio, int idUnidComercializacion) {
+        this.nombrePoducto = nombrePoducto;
+        this.clasificacion = clasificacion;
+        this.cantidaDisponible = cantidaDisponible;
+        this.localizacion = localizacion;
+        this.precio = precio;
+        this.idUnidComercializacion = idUnidComercializacion;
+    }
+
+    // Declarar los metodos get y set para la clase
 
     public int getIdproducto() {
         return idproducto;

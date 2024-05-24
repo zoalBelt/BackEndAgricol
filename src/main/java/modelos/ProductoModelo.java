@@ -91,7 +91,7 @@ public class ProductoModelo {
         }
     }
 
-    public boolean actualizarUnoPorId(Producto updateProducto){
+    public boolean actualizarUno(Producto updateProducto){
         Conexion conexion = new Conexion();
         conexion.openConexion();
         try{
