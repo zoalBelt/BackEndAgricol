@@ -87,12 +87,66 @@ public class ProductoModelo {
             conexion.closeConexion();
             return producto;
         }catch (Exception e){
-            System.out.println("Error getting all Clients" + e.getMessage());
+            System.out.println("Error consiguiendo todos los productos" + e.getMessage());
             return null;
         }
     }
 
-    public Producto actualizarUnoPorId(){
-        return null;
+    public boolean actualizarUnoPorId(Producto updateProducto){
+        Conexion conexion = new Conexion();
+        conexion.openConexion();
+        try{
+            String query = "UPDATE producto\n" +
+                    "SET\n" +
+                    "nombre = ?,\n" +
+                    "clasificacion = ?,\n" +
+                    "cantidaDisponibles =?,\n" +
+                    "localizacion = ?,\n" +
+                    "precio =?,\n" +
+                    "idComercializacion = ?\n" +
+                    "WHERE Idproducto = ?;";
+            conexion.pstm.setString(1, updateProducto.getNombrePoducto());
+            conexion.pstm.setString(2, updateProducto.getClasificaacion());
+            conexion.pstm.setDouble(3, updateProducto.getCantidaDisponible());
+            conexion.pstm.setString(4, updateProducto.getLocalizacion());
+            conexion.pstm.setDouble(5, updateProducto.getPrecio());
+            conexion.pstm.setInt(   6,updateProducto.getIdUnidComercializacion());
+            conexion.pstm.setInt(   7,updateProducto.getIdproducto());
+            conexion.pstm= conexion.dbConnection.prepareStatement(query);
+            int lineasInsertadas = conexion.pstm.executeUpdate();
+            if (lineasInsertadas > 0) {
+                System.out.println("Producto Creado");
+                conexion.closeConexion();
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     };
+
+    public boolean eliminarUnoPorId(int id){
+        Conexion conexion = new Conexion();
+        conexion.openConexion();
+        try{
+            String query = "DELETE FROM producto WHERE Idproducto = ?;";
+            conexion.pstm.setInt(1,id);
+            conexion.pstm= conexion.dbConnection.prepareStatement(query);
+            int lineasInsertadas = conexion.pstm.executeUpdate();
+            if (lineasInsertadas > 0) {
+                System.out.println("Producto Eliminado");
+                conexion.closeConexion();
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    };
+
+
 }
