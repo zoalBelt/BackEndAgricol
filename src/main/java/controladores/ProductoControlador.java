@@ -47,6 +47,7 @@ public class ProductoControlador {
 
     public void actualizar(Producto updateProducto, int id){
         Producto searchedProducto = this.conseguirUnoPorId(id);
+        updateProducto.setIdproducto(id);
         if (searchedProducto != null){
             productoModelo.actualizarUno(updateProducto);
         }

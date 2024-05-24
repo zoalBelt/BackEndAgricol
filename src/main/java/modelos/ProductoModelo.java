@@ -67,10 +67,11 @@ public class ProductoModelo {
         Conexion conexion = new Conexion();
         conexion.openConexion();
         Producto producto= new Producto();
+        System.out.println(id);
         try {
             String query = "Select * from producto WHERE Idproducto = ?";
-            conexion.pstm.setInt(1, id);
             conexion.pstm = conexion.dbConnection.prepareStatement(query);
+            conexion.pstm.setInt(1, id);
             ResultSet resp = conexion.pstm.executeQuery();
             while (resp.next()){
                 Producto objTemp = new Producto();
@@ -80,7 +81,7 @@ public class ProductoModelo {
                 objTemp.setClasificaacion(resp.getString("clasificacion"));
                 objTemp.setLocalizacion(resp.getString("localizacion"));
                 objTemp.setPrecio(resp.getDouble("precio"));
-                objTemp.setIdproducto(resp.getInt("idComercializacion"));
+                objTemp.setIdUnidComercializacion(resp.getInt("idComercializacion"));
                 producto = objTemp;
             }
             conexion.closeConexion();
@@ -94,16 +95,10 @@ public class ProductoModelo {
     public boolean actualizarUno(Producto updateProducto){
         Conexion conexion = new Conexion();
         conexion.openConexion();
+        System.out.println(updateProducto.toString());
         try{
-            String query = "UPDATE producto\n" +
-                    "SET\n" +
-                    "nombre = ?,\n" +
-                    "clasificacion = ?,\n" +
-                    "cantidaDisponibles =?,\n" +
-                    "localizacion = ?,\n" +
-                    "precio =?,\n" +
-                    "idComercializacion = ?\n" +
-                    "WHERE Idproducto = ?;";
+            String query = "UPDATE producto SET nombre = ?, clasificacion = ?,cantidaDisponibles =?, localizacion = ?, precio =?, idComercializacion = ? WHERE Idproducto = ?;";
+            conexion.pstm= conexion.dbConnection.prepareStatement(query);
             conexion.pstm.setString(1, updateProducto.getNombrePoducto());
             conexion.pstm.setString(2, updateProducto.getClasificaacion());
             conexion.pstm.setDouble(3, updateProducto.getCantidaDisponible());
@@ -111,13 +106,14 @@ public class ProductoModelo {
             conexion.pstm.setDouble(5, updateProducto.getPrecio());
             conexion.pstm.setInt(   6,updateProducto.getIdUnidComercializacion());
             conexion.pstm.setInt(   7,updateProducto.getIdproducto());
-            conexion.pstm= conexion.dbConnection.prepareStatement(query);
             int lineasInsertadas = conexion.pstm.executeUpdate();
             if (lineasInsertadas > 0) {
                 System.out.println("Producto Creado");
                 conexion.closeConexion();
                 return true;
             } else {
+                System.out.println(lineasInsertadas);
+                System.out.println("No se creo");
                 return false;
             }
         }catch (Exception e){
@@ -130,9 +126,11 @@ public class ProductoModelo {
         Conexion conexion = new Conexion();
         conexion.openConexion();
         try{
+
             String query = "DELETE FROM producto WHERE Idproducto = ?;";
-            conexion.pstm.setInt(1,id);
             conexion.pstm= conexion.dbConnection.prepareStatement(query);
+            conexion.pstm.setInt(1,id);
+
             int lineasInsertadas = conexion.pstm.executeUpdate();
             if (lineasInsertadas > 0) {
                 System.out.println("Producto Eliminado");
