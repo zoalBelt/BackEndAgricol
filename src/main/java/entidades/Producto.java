@@ -9,9 +9,9 @@ public class Producto {
     private int idproducto;
     private String nombrePoducto;
     private String clasificacion;
-    private String cantidaDisponible;
+    private double cantidaDisponible;
     private String localizacion;
-    private int precio;
+    private double precio;
     private int idUnidComercializacion;
 
 
@@ -20,7 +20,7 @@ public class Producto {
     public Producto() {
     }
 
-    public void Producto(int idproducto, String nombrePoducto, String clasificacion, String cantidaDisponible,
+    public void Producto(int idproducto, String nombrePoducto, String clasificacion, double cantidaDisponible,
                          String localizacion, int precio, int idUnidComercializacion){
 
         this.idproducto = idproducto;
@@ -57,11 +57,11 @@ public class Producto {
         this.clasificacion = newClasificacion;
     }
 
-    public String getCantidaDisponible() {
+    public double getCantidaDisponible() {
         return cantidaDisponible;
     }
 
-    public void setCantidaDisponible(String newCantidadDisponible) {
+    public void setCantidaDisponible(double newCantidadDisponible) {
         this.cantidaDisponible = newCantidadDisponible;
     }
 
@@ -73,11 +73,11 @@ public class Producto {
         this.localizacion = newLocalizacion;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int newPrecio) {
+    public void setPrecio(double newPrecio) {
 
         this.precio = newPrecio;
     }

@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 
 public class Conexion {
 
-    public static Connection dbConnection;
-    public static PreparedStatement pstm;
+    public  Connection dbConnection;
+    public  PreparedStatement pstm;
 
     public Conexion() {
         dbConnection = null;
